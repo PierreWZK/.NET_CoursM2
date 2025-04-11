@@ -1,6 +1,6 @@
 # ⚙️ .NET Authenticator — Projet de Back-Office pour Interventions
 
-![dotnet fun](https://i.giphy.com/Qn74oPyaKYBpVWdA7t.webp)
+![dev happy](https://i.giphy.com/YQitE4YNQNahy.webp)
 
 Bienvenue dans **le projet d'API back-office le plus stylé de l'année**. Cette app .NET 8 gère des interventions techniques à domicile avec :
 - des clients 👨‍💼
@@ -164,7 +164,7 @@ Ce projet est **fun, complet, et flexible**. Tu peux :
 - le forker 🍴
 - l'améliorer 🚀
 
-![dev happy](https://media.giphy.com/media/YQitE4YNQNahy/giphy.gif)
+![dotnet fun](https://i.giphy.com/Qn74oPyaKYBpVWdA7t.webp)
 
 ---
 
