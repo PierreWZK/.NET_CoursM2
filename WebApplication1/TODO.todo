@@ -1,0 +1,24 @@
+11/04
+Attendu technique :
+    ✔ Authentification via .NET Identity + JWT @done(25-04-11 10:32)
+    ✔ Gestion des rôles @started(25-04-11 10:32) @done(25-04-11 11:34) @lasted(1h2m13s)
+    ✘ Middleware de gestion d’erreurs au format RFC 7807 @cancelled(25-04-11 14:13)
+    ✘ Validations localisées et gestion multilingue @cancelled(25-04-11 14:13)
+    ✔ Architecture en couches (Controller / Service / Repository) @done(25-04-11 11:34)
+    ✔ Base de données avec EF Core, migrations, seed @done(25-04-11 11:34)
+
+Scénario de test :
+    ✔ 1. Création d’un compte admin (seed) @done(25-04-11 11:14)
+    ✔ 2. Connexion et génération de JWT @done(25-04-11 11:14)
+    ✔ 3. Création d’un client, d’un type de service, et de deux matériaux @done(25-04-11 11:14)
+    ✔ 4. Création d’un utilisateur technicien (seed + /register [by admin]) @done(25-04-11 11:14)
+    ✔ 5. Création d’une intervention assignant un client, un type, 2 techniciens et 2 matériaux @done(25-04-11 11:31)
+    ✔ 6. Test d’accès avec un technicien → ne voit que ses interventions @done(25-04-11 11:32)
+    ✔ 7. Test d’erreur avec données invalides (date dans le passé) @done(25-04-11 11:32)
+    ✘ 8. Test du retour multilingue des messages d’erreur @cancelled(25-04-11 14:13)
+    
+Autres TODO :
+    GET -> /api/intervention :
+        ✔ Can't parse JSON. Raw result ... -> Réussir à parser le JSON brut @done(25-04-11 12:02)
+        ✘ Erreur 403 transformer en 401 avec un texte personnalisé @cancelled(25-04-11 14:41)
+        ✔ Voir pour le BEARER token @done(25-04-11 14:41)
