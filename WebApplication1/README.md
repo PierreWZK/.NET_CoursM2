@@ -1,96 +1,141 @@
-# .NET Authenticator
+# ⚙️ .NET Authenticator — Projet de Back-Office pour Interventions
 
-This project is a .NET 8 Web API demonstrating a complete authentication system using **ASP.NET Core Identity** and **JWT (JSON Web Tokens)**. It is designed using a clean architecture with **three layers (Controller, Service, DataAccess)** and implements best practices for security and scalability.
+![dotnet fun](https://media1.tenor.com/m/3HK1-k9wUsQAAAAd/soy-coder.gif)
 
-## 📦 Features
+Bienvenue dans **le projet d'API back-office le plus stylé de l'année**. Cette app .NET 8 gère des interventions techniques à domicile avec :
+- des clients 👨‍💼
+- des techniciens 🧰
+- des admins puissants 👑
 
-- ✅ Authentication & Authorization using **JWT tokens**
-- 🔐 Secure **refresh token** mechanism
-- 👤 User & Role management with **ASP.NET Identity**
-- 🧱 Clean architecture: **Controller / Service / DataAccess**
-- 🧪 Ready for integration with frontend apps or mobile clients
-- 📁 Modular structure with support for **manual data seeding**
+## ✨ Fonctionnalités
 
-## 🧱 Architecture
+- 🔐 Authentification **JWT + ASP.NET Identity**
+- 🔁 Refresh tokens ultra sécurisés
+- 🧠 Architecture en couches **(Controller → Service → DataAccess)**
+- 🌍 Localisation multilingue (🇫🇷 & 🇬🇧)
+- 👮 Rôles `admin` / `technician` gérés au poil
+- 🧱 Base de données SQLite + EF Core + Seed automatique
 
-```
-├── Controllers/       # API entrypoints
-├── Services/          # Business logic
-├── DataAccess/        # EF Core context & repositories
-├── DTOs/              # Data transfer objects
-├── Models/            # Domain entities
-├── Program.cs         # App configuration
-├── appsettings.json   # Config file
-```
+## 🧠 Architecture
 
-## 🔧 Technologies
+├── Controllers/       # Entrées API
 
-- ASP.NET Core 8
-- Entity Framework Core
-- ASP.NET Identity
-- JWT Bearer Authentication
-- C# / .NET
-- SQL Server
+├── Services/          # Logique métier
 
-## 🔐 Endpoints
+├── DataAccess/        # Accès base (EF Core)
 
-### 🔑 Authentication
+├── Data/Entity/       # Entités persistées
 
-| Method | Route                | Description                  |
-|--------|----------------------|------------------------------|
-| POST   | `/api/auth/register` | Register a new user          |
-| POST   | `/api/auth/login`    | Login and receive JWT token  |
-| POST   | `/api/auth/refresh`  | Get a new access token       |
+├── Program.cs         # Bootstrap de l’app
 
-### 📰 Articles
+├── appsettings.json   # Configurations
 
-| Method | Route                | Description                        |
-|--------|----------------------|------------------------------------|
-| GET    | `/api/articles`      | Get all articles                   |
-| GET    | `/api/articles/{id}` | Get an article by ID               |
-| POST   | `/api/articles`      | Create a new article               |
-| DELETE | `/api/articles/{id}` | Delete an article by ID            |
+---
 
-## 🚀 Getting Started
+## 🚀 Démarrage rapide
 
-### 1. Clone the repository
+### 1. Clone le projet
 
 ```bash
 git clone https://github.com/ronanhenry-web/.NET-Authenticator.git
 cd .NET-Authenticator
 ```
 
-### 2. Configure the database
+### 2. Configure SQLite
 
-In `appsettings.json`, update the `DefaultConnection` string to match your SQL Lite settings.
+Modifie `appsettings.json` :
 
 ```json
 "ConnectionStrings": {
-    "DefaultConnection": "Data Source=articles.db"
-},
+  "DefaultConnection": "Data Source=articles.db"
+}
 ```
 
-### 3. Run migrations and seed the database
+### 3. Mets à jour la base de données
 
 ```bash
 dotnet ef database update
 ```
 
-(Seeding will insert demo users and roles)
-
-### 4. Run the application
+### 4. Lance l’appli
 
 ```bash
 dotnet run
 ```
 
-API is now available at: `https://localhost:5001` or `http://localhost:5000`
+Accès API : [http://localhost:5000/swagger](http://localhost:5000/swagger)  
+(ou https si activé)
 
-## 🧪 Testing
+![Code Work's](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzN3ZWsxeG84c2F6Y2ZqOW5vbHhscjloYWFsdWM4b29uajZxMTVvYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/12BYUePgtn7sis/giphy.gif)
 
-Use tools like Postman to test the API.
+---
 
-Example login request:
+## 🔑 Endpoints Authentification
+
+| Méthode | Route                  | Description                       |
+|--------|------------------------|-----------------------------------|
+| POST   | `/api/auth/register`   | ✅ Créer un utilisateur (admin)   |
+| POST   | `/api/auth/login`      | 🔐 Login + génération de JWT      |
+| POST   | `/api/auth/refresh`    | 🔄 Rafraîchir un access token     |
+
+---
+
+## 📰 Endpoints Articles
+
+| Méthode | Route                | Description                  |
+|--------|----------------------|------------------------------|
+| GET    | `/api/articles`      | Voir tous les articles       |
+| GET    | `/api/articles/{id}` | Détail d’un article          |
+| POST   | `/api/articles`      | Créer un article             |
+| DELETE | `/api/articles/{id}` | Supprimer un article         |
+
+---
+
+## 🔧 Endpoints Interventions
+
+| Méthode | Route                  | Rôle requis | Description                               |
+|--------|------------------------|-------------|-------------------------------------------|
+| GET    | `/api/intervention`    | tous        | Technicien : ses interventions<br>Admin : toutes |
+| POST   | `/api/intervention`    | admin       | Créer une nouvelle intervention           |
+
+> ✨ Interventions = Client + ServiceType + Techniciens + Matériaux
+
+---
+
+## 🔒 Endpoints Admin
+
+| Méthode | Route              | Description                        |
+|--------|--------------------|------------------------------------|
+| GET    | `/admin/crash`     | 💥 Réponse humoristique “Boom”     |
+| GET    | `/admin/message`   | 🧨 Déclenche une exception custom  |
+
+---
+
+## 🧪 Tester avec Swagger
+
+Swagger est préconfiguré pour :
+- Utiliser ton token **sans préfixe "Bearer "**  
+- Tester en live les routes avec différents rôles
+
+Tu peux simplement entrer le token brut dans Swagger, et il le préfixera pour toi :
+
+```
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+
+---
+
+## 🛡️ Sécurité
+
+- 🔒 Passwords hachés avec PBKDF2
+- ✅ Validation automatique des claims (email, roles…)
+- 🔁 Refresh Tokens liés à l’utilisateur et validés
+- 🧼 Gestion des erreurs au format [RFC 7807](https://datatracker.ietf.org/doc/html/rfc7807)
+
+---
+
+## 🤓 Exemple de login avec Postman
+
 ```json
 POST /api/auth/login
 {
@@ -99,22 +144,28 @@ POST /api/auth/login
 }
 ```
 
-## 🛡️ Security Highlights
+---
 
-- Passwords hashed using PBKDF2
-- JWT tokens signed and verified with a secret key
-- Refresh tokens stored securely and linked to users
-- CSRF/XSS mitigations explained in code comments
+## 📚 Bonus & Ressources
 
-## 📚 Based on
-
-This project follows concepts from an advanced .NET course, including:
-- REST API fundamentals
-- Identity + JWT setup
-- Manual seeding
-- Dependency Injection
-- Secure authentication flows
+Inspiré de tutoriels .NET avancés :
+- Clean Architecture
+- Gestion des rôles
+- JWT dans la vraie vie
+- Gestion multilingue
+- Migrations / Seed / Identity
 
 ---
 
-Feel free to fork and customize this boilerplate for your own use cases!
+## 🎉 Contribuer
+
+Ce projet est **fun, complet, et flexible**. Tu peux :
+- le cloner 🧬
+- le forker 🍴
+- l'améliorer 🚀
+
+![dev happy](https://media.giphy.com/media/YQitE4YNQNahy/giphy.gif)
+
+---
+
+**Fait avec ❤️ en .NET**
